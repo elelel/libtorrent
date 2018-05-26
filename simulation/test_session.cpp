@@ -133,7 +133,7 @@ TORRENT_TEST(force_proxy)
 
 	// disable force proxy in 3 seconds (this should make us open up listen
 	// sockets)
-	sim::timer t1(sim, lt::seconds(3), [&](boost::system::error_code const& ec)
+	sim::timer t1(sim, lt::seconds(3), [&](std::error_code const& ec)
 	{
 		lt::settings_pack p;
 		p.set_bool(settings_pack::force_proxy, false);
@@ -153,7 +153,7 @@ TORRENT_TEST(force_proxy)
 	});
 
 	// run for 10 seconds.
-	sim::timer t2(sim, lt::seconds(10), [&](boost::system::error_code const& ec)
+	sim::timer t2(sim, lt::seconds(10), [&](std::error_code const& ec)
 	{
 		fprintf(stderr, "shutting down\n");
 		// shut down

@@ -141,7 +141,7 @@ Here's a simple example of how to translate error codes:
 
 .. code:: c++
 
-	std::string error_code_to_string(boost::system::error_code const& ec)
+	std::string error_code_to_string(std::error_code const& ec)
 	{
 		if (ec.category() != lt::libtorrent_category())
 		{

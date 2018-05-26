@@ -434,7 +434,7 @@ struct TORRENT_EXTRA_EXPORT utp_stream
 		error_code ec;
 		std::size_t ret = read_some(buffers, ec);
 		if (ec)
-			boost::throw_exception(boost::system::system_error(ec));
+			boost::throw_exception(std::system_error(ec));
 		return ret;
 	}
 
@@ -444,7 +444,7 @@ struct TORRENT_EXTRA_EXPORT utp_stream
 		error_code ec;
 		std::size_t ret = write_some(buffers, ec);
 		if (ec)
-			boost::throw_exception(boost::system::system_error(ec));
+			boost::throw_exception(std::system_error(ec));
 		return ret;
 	}
 #endif

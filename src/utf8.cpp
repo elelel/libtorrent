@@ -207,7 +207,7 @@ namespace {
 
 	namespace utf8_errors
 	{
-		boost::system::error_code make_error_code(utf8_errors::error_code_enum e)
+		std::error_code make_error_code(utf8_errors::error_code_enum e)
 		{
 			return {e, utf8_category()};
 		}

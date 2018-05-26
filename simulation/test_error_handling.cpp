@@ -129,7 +129,7 @@ void run_test(HandleAlerts const& on_alert, Test const& test)
 	params.save_path = save_path(1);
 	ses[1]->async_add_torrent(params);
 
-	sim::timer t(sim, lt::seconds(60), [&](boost::system::error_code const& ec)
+	sim::timer t(sim, lt::seconds(60), [&](std::error_code const& ec)
 	{
 		test(ses);
 

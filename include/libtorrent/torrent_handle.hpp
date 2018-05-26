@@ -1161,7 +1161,7 @@ TORRENT_IPV6_NAMESPACE_END
 		// completes, they will be overwritten. When failing because of files
 		// already existing in the target path, the ``error`` of
 		// ``move_storage_failed_alert`` is set to
-		// ``boost::system::errc::file_exists``.
+		// ``std::errc::file_exists``.
 		//
 		// The intention is that a client may use this as a probe, and if it
 		// fails, ask the user which mode to use. The client may then re-issue

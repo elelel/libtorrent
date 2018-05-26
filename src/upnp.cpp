@@ -70,7 +70,7 @@ constexpr std::size_t max_global_mappings = 50;
 
 namespace upnp_errors
 {
-	boost::system::error_code make_error_code(error_code_enum e)
+	std::error_code make_error_code(error_code_enum e)
 	{ return {e, upnp_category()}; }
 
 } // upnp_errors namespace

@@ -84,7 +84,7 @@ void run_test(Setup const& setup
 	});
 
 	sim::timer t(sim, lt::seconds(60)
-		, [&](boost::system::error_code const&)
+		, [&](std::error_code const&)
 	{
 		test(*ses, test_peers);
 

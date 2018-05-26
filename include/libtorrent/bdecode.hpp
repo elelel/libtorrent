@@ -101,11 +101,11 @@ example layout:
 
 namespace libtorrent {
 
-TORRENT_EXPORT boost::system::error_category& bdecode_category();
+TORRENT_EXPORT std::error_category& bdecode_category();
 
 #if TORRENT_ABI_VERSION == 1
 TORRENT_DEPRECATED
-inline boost::system::error_category& get_bdecode_category()
+inline std::error_category& get_bdecode_category()
 { return bdecode_category(); }
 #endif
 
@@ -138,7 +138,7 @@ namespace bdecode_errors
 	};
 
 	// hidden
-	TORRENT_EXPORT boost::system::error_code make_error_code(error_code_enum e);
+	TORRENT_EXPORT std::error_code make_error_code(error_code_enum e);
 }
 } // namespace libtorrent
 
@@ -151,7 +151,7 @@ namespace boost { namespace system {
 
 namespace libtorrent {
 
-	using error_code = boost::system::error_code;
+	using error_code = std::error_code;
 
 TORRENT_EXTRA_EXPORT char const* parse_int(char const* start
 	, char const* end, char delimiter, std::int64_t& val

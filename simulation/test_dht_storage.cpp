@@ -82,7 +82,7 @@ namespace
 
 void timer_tick(dht_storage_interface* s
 	, dht_storage_counters const& c
-	, boost::system::error_code const&)
+	, std::error_code const&)
 {
 	s->tick();
 
@@ -104,7 +104,7 @@ void test_expiration(high_resolution_clock::duration const& expiry_time
 	timer.expires_from_now(expiry_time);
 	timer.async_wait(std::bind(&timer_tick, s.get(), c, _1));
 
-	boost::system::error_code ec;
+	std::error_code ec;
 	sim.run(ec);
 }
 
@@ -197,7 +197,7 @@ TORRENT_TEST(dht_storage_infohashes_sample)
 
 	sim::asio::high_resolution_timer timer(ios);
 	timer.expires_from_now(hours(1)); // expiration of torrents
-	timer.async_wait([&s](boost::system::error_code const& ec)
+	timer.async_wait([&s](std::error_code const& ec)
 	{
 		// tick here to trigger the torrents expiration
 		s->tick();
@@ -207,7 +207,7 @@ TORRENT_TEST(dht_storage_infohashes_sample)
 		TEST_EQUAL(r, 0);
 	});
 
-	boost::system::error_code ec;
+	std::error_code ec;
 	sim.run(ec);
 }
 

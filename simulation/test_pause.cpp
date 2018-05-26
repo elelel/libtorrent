@@ -93,7 +93,7 @@ void run_test(Setup const& setup, Torrent const& torrent
 	});
 
 	sim::timer t1(sim, lt::seconds(5)
-		, [&](boost::system::error_code const&)
+		, [&](std::error_code const&)
 	{
 		test(*ses, h, test_peers);
 	});
@@ -101,7 +101,7 @@ void run_test(Setup const& setup, Torrent const& torrent
 	// set up a timer to fire later, to verify everything we expected to happen
 	// happened
 	sim::timer t2(sim, lt::seconds(10)
-		, [&](boost::system::error_code const&)
+		, [&](std::error_code const&)
 	{
 		check(*ses, h, test_peers);
 

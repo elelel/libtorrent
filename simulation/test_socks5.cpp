@@ -89,7 +89,7 @@ void run_test(Setup const& setup
 
 	// set up a timer to fire later, to verify everything we expected to happen
 	// happened
-	sim::timer t(sim, lt::seconds(100), [&](boost::system::error_code const&)
+	sim::timer t(sim, lt::seconds(100), [&](std::error_code const&)
 	{
 		std::printf("shutting down\n");
 		// shut down
@@ -271,7 +271,7 @@ TORRENT_TEST(socks5_udp_retry)
 
 	// run for 60 seconds.The sokcks5 retry interval is expected to be 5 seconds,
 	// meaning there should have been 12 connection attempts
-	sim::timer t(sim, lt::seconds(60), [&](boost::system::error_code const& ec)
+	sim::timer t(sim, lt::seconds(60), [&](std::error_code const& ec)
 	{
 		fprintf(stderr, "shutting down\n");
 		// shut down

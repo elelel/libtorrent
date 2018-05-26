@@ -87,7 +87,7 @@ namespace libtorrent {
 
 	namespace i2p_error
 	{
-		boost::system::error_code make_error_code(i2p_error_code e)
+		std::error_code make_error_code(i2p_error_code e)
 		{
 			return {e, i2p_category()};
 		}

@@ -281,7 +281,7 @@ struct sim_config : sim::default_config
 		asio::ip::address const& requestor
 		, std::string hostname
 		, std::vector<asio::ip::address>& result
-		, boost::system::error_code& ec) override
+		, std::error_code& ec) override
 	{
 		if (hostname == "tracker.com")
 		{
@@ -397,7 +397,7 @@ void test_ipv6_support(char const* listen_interfaces
 
 		// stop the torrent 5 seconds in
 		sim::timer t1(sim, lt::seconds(5)
-			, [&ses](boost::system::error_code const&)
+			, [&ses](std::error_code const&)
 		{
 			std::vector<lt::torrent_handle> torrents = ses->get_torrents();
 			for (auto const& t : torrents)
@@ -408,7 +408,7 @@ void test_ipv6_support(char const* listen_interfaces
 
 		// then shut down 10 seconds in
 		sim::timer t2(sim, lt::seconds(10)
-			, [&ses,&zombie](boost::system::error_code const&)
+			, [&ses,&zombie](std::error_code const&)
 		{
 			zombie = ses->abort();
 			ses.reset();
@@ -495,7 +495,7 @@ void test_udpv6_support(char const* listen_interfaces
 
 		// stop the torrent 5 seconds in
 		sim::timer t1(sim, lt::seconds(5)
-			, [&ses](boost::system::error_code const&)
+			, [&ses](std::error_code const&)
 		{
 			std::vector<lt::torrent_handle> torrents = ses->get_torrents();
 			for (auto const& t : torrents)
@@ -506,7 +506,7 @@ void test_udpv6_support(char const* listen_interfaces
 
 		// then shut down 10 seconds in
 		sim::timer t2(sim, lt::seconds(10)
-			, [&ses,&zombie](boost::system::error_code const&)
+			, [&ses,&zombie](std::error_code const&)
 		{
 			zombie = ses->abort();
 			ses.reset();
@@ -622,7 +622,7 @@ void tracker_test(Setup setup, Announce a, Test1 test1, Test2 test2
 
 	// run the test 5 seconds in
 	sim::timer t1(sim, lt::seconds(5)
-		, [&ses,&test1](boost::system::error_code const&)
+		, [&ses,&test1](std::error_code const&)
 	{
 		std::vector<lt::torrent_handle> torrents = ses->get_torrents();
 		TEST_EQUAL(torrents.size(), 1);
@@ -631,7 +631,7 @@ void tracker_test(Setup setup, Announce a, Test1 test1, Test2 test2
 	});
 
 	sim::timer t2(sim, lt::seconds(5 + delay)
-		, [&ses,&test2](boost::system::error_code const&)
+		, [&ses,&test2](std::error_code const&)
 	{
 		std::vector<lt::torrent_handle> torrents = ses->get_torrents();
 		TEST_EQUAL(torrents.size(), 1);
@@ -641,7 +641,7 @@ void tracker_test(Setup setup, Announce a, Test1 test1, Test2 test2
 
 	// then shut down 10 seconds in
 	sim::timer t3(sim, lt::seconds(10 + delay)
-		, [&ses,&zombie](boost::system::error_code const&)
+		, [&ses,&zombie](std::error_code const&)
 	{
 		zombie = ses->abort();
 		ses.reset();
@@ -1224,7 +1224,7 @@ TORRENT_TEST(tracker_tiers)
 	params.save_path = save_path(1);
 	ses[1]->async_add_torrent(params);
 
-	sim::timer t(sim, lt::minutes(30), [&](boost::system::error_code const& ec)
+	sim::timer t(sim, lt::minutes(30), [&](std::error_code const& ec)
 	{
 		TEST_CHECK(received_announce[0] != received_announce[1]);
 		TEST_CHECK(ses[0]->get_torrents()[0].status().is_seeding);

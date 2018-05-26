@@ -89,15 +89,15 @@ namespace libtorrent {
 		};
 
 		// hidden
-		TORRENT_EXPORT boost::system::error_code make_error_code(error_code_enum e);
+		TORRENT_EXPORT std::error_code make_error_code(error_code_enum e);
 	}
 
 	// the boost.system error category for UPnP errors
-	TORRENT_EXPORT boost::system::error_category& upnp_category();
+	TORRENT_EXPORT std::error_category& upnp_category();
 
 #if TORRENT_ABI_VERSION == 1
 	TORRENT_DEPRECATED
-	inline boost::system::error_category& get_upnp_category()
+	inline std::error_category& get_upnp_category()
 	{ return upnp_category(); }
 #endif
 

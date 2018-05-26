@@ -1196,14 +1196,14 @@ namespace aux {
 				m_pc.setup_send();
 			}
 			catch (std::bad_alloc const&) {
-				m_pc.disconnect(make_error_code(boost::system::errc::not_enough_memory)
+				m_pc.disconnect(make_error_code(std::errc::not_enough_memory)
 					, operation_t::sock_write);
 			}
-			catch (boost::system::system_error const& err) {
+			catch (std::system_error const& err) {
 				m_pc.disconnect(err.code(), operation_t::sock_write);
 			}
 			catch (...) {
-				m_pc.disconnect(make_error_code(boost::system::errc::not_enough_memory)
+				m_pc.disconnect(make_error_code(std::errc::not_enough_memory)
 					, operation_t::sock_write);
 			}
 		}

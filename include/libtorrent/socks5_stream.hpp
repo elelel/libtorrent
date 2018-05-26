@@ -65,16 +65,16 @@ namespace socks_error {
 	};
 
 	// internal
-	TORRENT_EXPORT boost::system::error_code make_error_code(socks_error_code e);
+	TORRENT_EXPORT std::error_code make_error_code(socks_error_code e);
 
 } // namespace socks_error
 
 // returns the error_category for SOCKS5 errors
-TORRENT_EXPORT boost::system::error_category& socks_category();
+TORRENT_EXPORT std::error_category& socks_category();
 
 #if TORRENT_ABI_VERSION == 1
 TORRENT_DEPRECATED
-inline boost::system::error_category& get_socks_category()
+inline std::error_category& get_socks_category()
 { return socks_category(); }
 #endif
 

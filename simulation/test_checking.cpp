@@ -72,7 +72,7 @@ void run_test(Setup const& setup, Test const& test)
 
 	print_alerts(*ses);
 
-	sim::timer t(sim, lt::seconds(6), [&](boost::system::error_code const&)
+	sim::timer t(sim, lt::seconds(6), [&](std::error_code const&)
 	{
 		test(*ses);
 

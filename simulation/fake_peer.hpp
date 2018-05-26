@@ -55,7 +55,7 @@ struct fake_peer
 	fake_peer(simulation& sim, char const* ip)
 		: m_ios(sim, asio::ip::address::from_string(ip))
 	{
-		boost::system::error_code ec;
+		std::error_code ec;
 		m_acceptor.open(asio::ip::tcp::v4(), ec);
 		TEST_CHECK(!ec);
 		m_acceptor.bind(asio::ip::tcp::endpoint(asio::ip::address_v4::any(), 6881), ec);
@@ -63,7 +63,7 @@ struct fake_peer
 		m_acceptor.listen(10, ec);
 		TEST_CHECK(!ec);
 
-		m_acceptor.async_accept(m_socket, [&] (boost::system::error_code const& ec)
+		m_acceptor.async_accept(m_socket, [&] (std::error_code const& ec)
 		{
 			using namespace std::placeholders;
 			if (ec) return;
@@ -133,7 +133,7 @@ struct fake_peer
 
 private:
 
-	void write_handshake(boost::system::error_code const& ec
+	void write_handshake(std::error_code const& ec
 		, lt::sha1_hash ih)
 	{
 		using namespace std::placeholders;
@@ -153,7 +153,7 @@ private:
 		memcpy(&m_out_buffer[28], ih.data(), 20);
 
 		asio::async_write(m_socket, asio::const_buffers_1(&m_out_buffer[0]
-			, len), [this, ep](boost::system::error_code const& ec
+			, len), [this, ep](std::error_code const& ec
 			, size_t /* bytes_transferred */)
 		{
 			std::printf("fake_peer::write_handshake(%s) -> (%d) %s\n"
@@ -229,7 +229,7 @@ private:
 			, std::bind(&fake_peer::on_read, this, _1, _2));
 	}
 
-	void write_send_buffer(boost::system::error_code const& ec
+	void write_send_buffer(std::error_code const& ec
 		, size_t /* bytes_transferred */)
 	{
 		using namespace std::placeholders;
@@ -285,7 +285,7 @@ struct udp_server
 		: m_ios(sim, asio::ip::address::from_string(ip))
 		, m_handler(handler)
 	{
-		boost::system::error_code ec;
+		std::error_code ec;
 		m_socket.open(asio::ip::udp::v4(), ec);
 		TEST_CHECK(!ec);
 		m_socket.bind(asio::ip::udp::endpoint(asio::ip::address_v4::any(), port), ec);
@@ -303,7 +303,7 @@ struct udp_server
 
 private:
 
-	void on_read(boost::system::error_code const& ec, size_t bytes_transferred)
+	void on_read(std::error_code const& ec, size_t bytes_transferred)
 	{
 		std::printf("udp_server::async_read_some callback. ec: %s transferred: %d\n"
 			, ec.message().c_str(), int(bytes_transferred));
@@ -347,7 +347,7 @@ struct fake_node : udp_server
 		: udp_server(sim, ip, port, [&](char const* incoming, int size)
 		{
 			lt::bdecode_node n;
-			boost::system::error_code err;
+			std::error_code err;
 			int const ret = bdecode(incoming, incoming + size, n, err, nullptr, 10, 200);
 			TEST_EQUAL(ret, 0);
 

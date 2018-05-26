@@ -39,7 +39,7 @@ namespace libtorrent {
 
 	namespace socks_error
 	{
-		boost::system::error_code make_error_code(socks_error_code e)
+		std::error_code make_error_code(socks_error_code e)
 		{ return {e, socks_category()}; }
 	}
 

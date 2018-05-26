@@ -127,7 +127,7 @@ void run_test(Setup const& setup
 
 	// set up a timer to fire later, to verify everything we expected to happen
 	// happened
-	sim::timer t(sim, timeout, [&](boost::system::error_code const& ec)
+	sim::timer t(sim, timeout, [&](std::error_code const& ec)
 	{
 		std::printf("shutting down\n");
 		// shut down

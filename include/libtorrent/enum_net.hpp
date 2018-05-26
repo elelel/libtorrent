@@ -159,7 +159,7 @@ namespace libtorrent {
 
 			if (!found)
 			{
-				ec = error_code(boost::system::errc::no_such_device, generic_category());
+				ec = error_code(std::errc::no_such_device, generic_category());
 				return bind_ep.address();
 			}
 		}

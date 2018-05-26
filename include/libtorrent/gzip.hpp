@@ -48,11 +48,11 @@ namespace libtorrent {
 		, error_code& error);
 
 	// get the ``error_category`` for zip errors
-	TORRENT_EXPORT boost::system::error_category& gzip_category();
+	TORRENT_EXPORT std::error_category& gzip_category();
 
 #if TORRENT_ABI_VERSION == 1
 	TORRENT_DEPRECATED
-	inline boost::system::error_category& get_gzip_category()
+	inline std::error_category& get_gzip_category()
 	{ return gzip_category(); }
 #endif
 
@@ -116,7 +116,7 @@ namespace libtorrent {
 		};
 
 		// hidden
-		TORRENT_EXPORT boost::system::error_code make_error_code(error_code_enum e);
+		TORRENT_EXPORT std::error_code make_error_code(error_code_enum e);
 	}
 
 }

@@ -92,7 +92,7 @@ TORRENT_TEST(optimistic_unchoke)
 
 	print_alerts(*ses);
 
-	sim::timer t(sim, lt::seconds(0), [&](boost::system::error_code const&)
+	sim::timer t(sim, lt::seconds(0), [&](std::error_code const&)
 	{
 		for (int i = 0; i < num_nodes; ++i)
 		{
@@ -143,7 +143,7 @@ TORRENT_TEST(optimistic_unchoke)
 		}
 	});
 
-	sim::timer t2(sim, test_duration, [&](boost::system::error_code const&)
+	sim::timer t2(sim, test_duration, [&](std::error_code const&)
 	{
 		for (auto& p : peers)
 		{
